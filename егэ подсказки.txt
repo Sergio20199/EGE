@@ -1,0 +1,112 @@
+2 задание 
+x =(тройное равно) y --- x==y
+y -> x --- y<=x
+/\ --- and()
+\/ --- or()
+-a --- not a
+(not a) - приоритетность
+пример для перебора:
+#f1 = (w=x)|\(y->z)
+#f2 = (w->x)->(y=z)
+def f1(x,y,w,z):
+    return int((w==x)and(y <=z))
+def f2(x,y,w,z):
+    return int((w<=x)<=(y==z))
+for x in (0,1):
+     for y in (0,1):
+         for w in (0,1):
+             for z in (0,1):
+                 print(x, y, w, z, f1(x, y, w, z), f2(x, y, w, z))
+задание 15
+def f(x, y, A):
+    return ((x<=9) <= (x**2 <= A)) and ((y**2 <= A) <= (y <= 9))
+
+for A in range(200, 1, -1):
+    if all([f(x, y, A) for x in range(1, 200) for y in range(1, 200)]):
+        print(A)
+        break
+задание 5
+def aboba(n):
+    bin_n = bin(n)[2:]
+    if bin_n.count('1') % 2 == 0:
+        bin_n += '0' * 2
+    else:
+        bin_n += '1' * 2
+    return(int(bin_n,2))
+
+for n in range(115):
+    r = aboba(n)
+    if r > 114:
+        print(r)
+        break
+
+def aboba(n):
+    bin_n = bin(n)[2:]
+    if n % 2 == 0:
+        bin_n += '10'
+    else:
+        bin_n += '01'
+    return(int(bin_n,2))
+
+for n in range(109,1,-1):
+    r = aboba(n)
+    if r < 109:
+        print(r)
+        break
+черепешка???
+from turtle import *
+k = 20
+speed(1)
+#tracer(0)
+lt(90)
+#hideturtle()
+for i in range(1000):
+    forward(10*k); right(120)
+
+def print_sqr(n):
+    # матрица создается
+    
+    size = 2 * n - 1
+    grid = [[0] * size for _ in range(size)]
+#       print(grid)
+
+    for i in range(n):
+        # значениеквадрата
+        val = n - i
+        # верхн и нижн
+        for j in range(i, size - i):
+            grid[i][j] = val
+            grid[size - i - 1][j] = val
+ #           print(grid,'----1')
+        # лев и прав
+        for j in range(i + 1, size - i - 1):
+            grid[j][i] = val
+            grid[j][size - i - 1] = val
+#            print(grid,'----2')
+
+    for row in grid:
+        print(''.join(str(num) for num in row))
+
+n = int(input("Введите цифру от 1 до 9: "))
+print_sqr(n)
+19-20-21:
+win = 68  
+def f(k, m):
+    if k >= win:    return m%2==0   # k >= win - условие остановки/победы
+    elif m == 0:    return False
+    l = [ f(k+1, m-1), f(k+4, m-1),f(k*5, m-1) ]    # все возможные ходы
+    if m%2==0:
+        return all(l)
+    else:
+        return any(l)
+
+def f_neudacha(k, m):
+    if k >= win:    return m%2==0   # k >= win - условие остановки/победы
+    elif m == 0:    return False
+    l = [ f(k+1, m-1), f(k+4, m-1),f(k*5, m-1) ]    # все возможные ходы
+    return any(l)
+    
+
+print("19: ", *[s for s in range(1, 68) if f_neudacha(s, 2)])
+print("20: ", *[s for s in range(1, 68) if f(s, 3) and not f(s, 1)])
+print("21: ", *[s for s in range(1, 68) if f(s, 4) and not f(s, 2)]) 
