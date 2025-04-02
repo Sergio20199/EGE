@@ -1,22 +1,15 @@
-f = open("")
-max_count_G = 0
-a = f.read()
-s = ""
-for string in a.split():
-    cur_count_G = string.count("Q")
-    if cur_count_G > max_count_G:
-        max_count_G = cur_count_G
-        s = string
+B0, B1 = 1, 9999
+C0, C1 = 3648, 6287
 
-syms = {}
-for i in s:
-    syms[i] = syms.get(i, 0) + 1
+def f(x, A0, A1, y):
+    return ((B0 <= x <= B1) ==(C0 <= x <= C1)) or (A0 <= x <= A1) or (x >4200) or (y > 500)
 
-max_count = min(syms.values())
-spisok_syms = []
+min_len_A = float('inf')
+limit = 10000
 
-for key, value in syms.items():
-    if value == max_count:
-        spisok_syms.append(key)
-print(sorted(spisok_syms))
-print(a.count(sorted(spisok_syms)[0]))
+for A0 in range(1, limit):
+    for A1 in range(A0 + 1, limit):
+        if all(f(x, A0, A1, y) for x in range(1, limit) for y in range(1, limit)):
+            min_len_A = min(min_len_A, A1 - A0)
+
+print(min_len_A)

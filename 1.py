@@ -1,16 +1,13 @@
-s = open('24_demo.txt').read()
-
-count = 0
-max_count = 0
-for i in range(len(s)):
-    if s[i] == 'X':
-        count += 1
-        if s[i] == 'Y':
-            count += 1
-            if s[i] == 'Z':
-                count += 1
-        max_count = max(max_count, count)
-    else:
-        count = 0
-print(max_count)
+for x in range(2042,1,-1):
+    n = 25**61 + 5**178 - x
+    nf = ''
+    while n > 0:
+        nf+= str(n%5)
+        n = n // 5
         
+    if nf.count('0') == 60:
+        print(x)
+        break
+        
+    
+    
